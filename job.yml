@@ -1,0 +1,14 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+command: >
+  python train.py --data_path ${{inputs.dataset}} --model_path ${{outputs.model}}
+inputs:
+  dataset:
+    type: uri_file
+    path: azureml:final_dataset@latest
+outputs:
+  model:
+    type: uri_file
+compute: azureml:cpu-cluster
+environment: azureml:AzureML-Scikit-learn0.24-Cuda11-OpenMpi4.1.0-py36@latest
+description: "Training job for activity recognition"
+experiment_name: "activity-recognition-experiment"
